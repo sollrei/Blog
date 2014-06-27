@@ -1,6 +1,16 @@
 extends layout
 
 block content_main
-    h1= title
-    p Welcome to #{title}
+    div.container
+        form(role="form" method="post")
+            div.form-group
+                label 用户名
+                    input.form-control(type="email" placeholder="Enter email" name="name")
+            div.form-group
+                label 密码
+                    input.form-control(type="password" placeholder="Password" name="password")
+            button.btn.btn-primary(type="submit") 登录
+
+
+
                          
