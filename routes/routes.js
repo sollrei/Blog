@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router(),
     crypto = require('crypto'),
     User = require('./../models/user'),
-    Post = require('./../models/post');
+    Post = require('./../models/post'),
+    markdown = require('markdown').markdown;
 
 function checkLogin (req, res, next) {
     if (!req.session.user) {
@@ -27,6 +28,9 @@ router.get('/', function(req, res) {
         if (err) {
             posts = [];
         }
+        posts.forEach(function (doc) {
+            doc.post = markdown.toHTML(doc.post);
+        });
         res.render('index', { title: '主页',
             user: req.session.user,
             posts: posts,
