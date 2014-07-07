@@ -1,4 +1,12 @@
 extends layout
 
 block content_main
-    p hello
+    div.container
+        form(method="post" role="form")
+            div.from-group
+                label 标题
+                    input.form-control(type="text" placeholder="文章标题" name="title")
+            div.form-group
+                label 正文
+                textarea.form-control(rows="9" name="post")
+            button.btn.btn-primary(type="submit") 发布

@@ -2,7 +2,9 @@ extends layout
 
 block content_main
     div.container
-        h1= title
-        p Welcome to #{title}
-        p hello
-            span  world
+        each post,i in posts
+            h3
+                a(href="#") #{post.title}
+                p
+                    small by #{post.name} at #{post.time.minute}
+            div !{post.post}
