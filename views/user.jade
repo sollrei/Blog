@@ -6,7 +6,5 @@ block content_main
             h3
                 a(href="/u/#{post.name}/#{post.time.day}/#{post.title}") #{post.title}
                 p
-                    small by&nbsp;
-                        a(href="/u/#{post.name}") #{post.name}
-                        |&nbsp;at #{post.time.minute}
+                    small by #{post.name} at #{post.time.minute}
             div !{post.post}

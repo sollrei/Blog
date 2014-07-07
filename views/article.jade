@@ -1,0 +1,10 @@
+extends layout
+
+block content_main
+    div.container
+        h3 #{post.title}
+        p.info 作者:&nbsp;
+            a(href="/u/#{post.name}") #{post.name}&nbsp;
+            |日期:&nbsp;#{post.time.minute}
+        div !{post.post}
+

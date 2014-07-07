@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router(),
+var express = require('express'),
+    router = express.Router(),
     crypto = require('crypto'),
     User = require('./../models/user'),
     Post = require('./../models/post'),
@@ -21,17 +21,17 @@ function checkNotLogin (req, res, next) {
     next();
 }
 
-
 /* GET home page. */
 router.get('/', function(req, res) {
-    Post.get(null, function (err, posts) {
+    Post.getAll(null, function (err, posts) {
         if (err) {
             posts = [];
         }
         posts.forEach(function (doc) {
             doc.post = markdown.toHTML(doc.post);
         });
-        res.render('index', { title: '主页',
+        res.render('index', {
+            title: '主页',
             user: req.session.user,
             posts: posts,
             success: req.flash('success').toString(),
@@ -62,6 +62,26 @@ router.get('/login', function(req, res) {
     });
 });
 
+router.post('/login',checkNotLogin);
+router.post('/login', function (req, res) {
+    var name = req.body.name,
+        password,
+        md5 = crypto.createHash('md5');
+    password = md5.update(req.body.password).digest('hex');
+    User.get(name, function (err, user) {
+        if (!user) {
+            req.flash('error', '用户名不存在');
+        } else if (user.password != password) {
+            req.flash('error', '用户名或密码错误');
+        } else {
+            req.session.user = user;
+            req.flash('success', '登录成功');
+            res.redirect('/');
+        }
+
+    });
+});
+
 /* GET logout page. */
 router.get('/logout', checkLogin);
 router.get('/logout', function(req, res) {
@@ -73,10 +93,26 @@ router.get('/logout', function(req, res) {
 /* GET post page. */
 router.get('/post', checkLogin);
 router.get('/post', function(req, res) {
-    res.render('post', { title: '发表',
+    res.render('post', {
+        title: '发表',
         user: req.session.user,
         success: req.flash('success').toString(),
         error: req.flash('error').toString() });
+});
+
+router.post('/post', checkLogin);
+router.post('/post', function (req, res) {
+    var currentUser = req.session.user,
+        post = new Post(currentUser.name, req.body.title, req.body.post);
+    post.save(function (err) {
+        if (err) {
+            req.flash('error', err);
+            return res.redirect('/');
+        }
+        req.flash('success', '发布成功');
+        res.redirect('/');
+    });
+
 });
 
 /* GET reg page. */
@@ -88,10 +124,6 @@ router.get('/reg', function(req, res) {
         error: req.flash('error').toString() });
 });
 
-
-/*
- * reg
- * */
 router.post('/reg', checkNotLogin);
 router.post('/reg', function (req, res) {
     var name = req.body.name,
@@ -128,46 +160,61 @@ router.post('/reg', function (req, res) {
     });
 });
 
-/*
- * login
- * */
-router.post('/login',checkNotLogin);
-router.post('/login', function (req, res) {
-    var name = req.body.name,
-        password,
-        md5 = crypto.createHash('md5');
-    password = md5.update(req.body.password).digest('hex');
-    User.get(name, function (err, user) {
+/* articles of the user */
+router.get('/u/:name', function (req, res) {
+    User.get(req.params.name, function (err, user) {
         if (!user) {
-            req.flash('error', '用户名不存在');
-        } else if (user.password != password) {
-            req.flash('error', '用户名或密码错误');
-        } else {
-            req.session.user = user;
-            req.flash('success', '登录成功');
-            res.redirect('/');
+            req.flash('error', '用户不存在！');
+            return res.redirect('/');
         }
 
-    });
+        Post.getAll(user.name, function (err, posts) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            posts.forEach(function (doc) {
+                doc.post = markdown.toHTML(doc.post);
+            });
+            res.render('user', {
+                title: user.name,
+                posts: posts,
+                user: req.session.user,
+                success: req.flash('success').toString(),
+                error: req.flash('error').toString()
+            });
+        });
+    })
 });
 
-/*
- * post
- * */
-router.post('/post', checkLogin);
-router.post('/post', function (req, res) {
-    var currentUser = req.session.user,
-        post = new Post(currentUser.name, req.body.title, req.body.post);
-    post.save(function (err) {
+/* single article */
+router.get('/u/:name/:day/:title', function (req, res) {
+    Post.getOne(req.params.name, req.params.day, req.params.title, function (err, doc) {
         if (err) {
             req.flash('error', err);
             return res.redirect('/');
         }
-        req.flash('success', '发布成功');
-        res.redirect('/');
+        doc.post = markdown.toHTML(doc.post);
+        res.render('article', {
+            title: req.param.title,
+            post: doc,
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
     });
-
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
