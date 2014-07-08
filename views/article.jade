@@ -5,6 +5,9 @@ block content_main
         h3 #{post.title}
         p.info 作者:&nbsp;
             a(href="/u/#{post.name}") #{post.name}&nbsp;
-            |日期:&nbsp;#{post.time.minute}
+            |日期:&nbsp;#{post.time.minute}&nbsp;
+            if user.name == post.name
+                a(href="/edit/#{post.name}/#{post.time.day}/#{post.title}") 编辑&nbsp;
+                a(href="/remove/#{post.name}/#{post.time.day}/#{post.title}") 删除
         div !{post.post}
 

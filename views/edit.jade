@@ -1,0 +1,11 @@
+extends layout
+
+block content_main
+    div.container
+        form(method="post" role="form")
+            div.from-group
+                h3 #{post.title}
+            div.form-group
+                label 正文
+                textarea.form-control(rows="9" name="post") !{post.post}
+            button.btn.btn-primary(type="submit") 保存修改
