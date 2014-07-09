@@ -3,6 +3,7 @@ var express = require('express'),
     crypto = require('crypto'),
     User = require('./../models/user'),
     Post = require('./../models/post'),
+    Comment = require('./../models/comment'),
     markdown = require('markdown').markdown;
 
 function checkLogin (req, res, next) {
@@ -207,6 +208,35 @@ router.get('/u/:name/:day/:title', function (req, res) {
         });
     });
 });
+router.post('/u/:name/:day/:title', function (req, res) {
+    var date = new Date(),
+        time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + " " + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+
+    var comment = {
+        name: req.body.name,
+        email: req.body.email,
+        website: req.body.website,
+        time: time,
+        content: req.body.content
+    };
+
+    var newComment = new Comment(req.params.name, req.params.day, req.params.title, comment);
+    newComment.save(function (err) {
+        if (err) {
+            req.flash('error', err);
+            return res.redirect('back');
+        }
+        req.flash('success', '留言成功');
+        res.redirect('back');
+    });
+
+
+
+});
+
+
+
+
 
 /* edit */
 router.get('/edit/:name/:day/:title', checkLogin);
@@ -254,9 +284,6 @@ router.get('/remove/:name/:day/:title', function (req, res) {
         res.redirect('/');
     });
 });
-
-
-
 
 
 
