@@ -1,23 +1,27 @@
 each comment in post.comments
-    p
-        a(href="comment.website") #{comment.name}
-        span 回复于 #{comment.time}
-    p !{comment.content}
+    section.comments
+        article.comment
+            header.hd    
+                a(href="comment.website") #{comment.name}
+                span 回复于 #{comment.time}
+            div.content !{comment.content}
 
-p 留言
-form(method="post" role="form")
-    div.form-group
-        label 姓名
-            if user
-                input(type="text" name="name" value="#{user.name}")
-            else
-                input(type="text" name="name")
-    div.form-group
-        label 邮箱
-            input(type="email" name="email")
-    div.form-group
-        label 网址
-            input(type="text" name="website")
-    textarea.form-control(rows="9" name="content")
-    button.btn.btn-primary(type="submit") 留言
+section.message
+    header.hd 留言
+    form(method="post" role="form")
+        div.input-group
+            label.control-label 姓名
+                if user
+                    input.form-control(type="text" name="name" value="#{user.name}")
+                else
+                    input.form-control(type="text" name="name")
+        div.input-group
+            label 邮箱
+                input.form-control(type="email" name="email")
+        div.input-group
+            label 网址
+                input.form-control(type="text" name="website")
+        textarea.form-control(rows="9" name="content")
+        div.form-group
+            button.btn.btn-primary(type="submit") 留言
 

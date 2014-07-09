@@ -2,13 +2,22 @@ extends common/layout
 
 block content_main
     div.container
-        h3 #{post.title}
-        p.info 作者:&nbsp;
-            a(href="/u/#{post.name}") #{post.name}&nbsp;
-            |日期:&nbsp;#{post.time.minute}&nbsp;
-            if user.name == post.name
-                a(href="/edit/#{post.name}/#{post.time.day}/#{post.title}") 编辑&nbsp;
-                a(href="/remove/#{post.name}/#{post.time.day}/#{post.title}") 删除
-        div !{post.post}
-
-        include articles/comment
+        div.main.fl
+            article.article
+                div.date
+                    span.glyphicon.glyphicon-calendar.ico
+                    span.day #{post.time.sDay}
+                    span.month #{post.time.sMonth}
+                    span.year #{post.time.year}
+                h3.title.pt-10.pb-10 #{post.title}
+                p.info.ft-lighter
+                    span.glyphicon.glyphicon-user.mr-10
+                    a.mr-10(href="/u/#{post.name}") #{post.name}
+                    span.mr-10 /
+                    span.glyphicon.glyphicon-comment.mr-10
+                    span.mr-10 #{post.comments.length}
+                    span.mr-10 /
+                    span.glyphicon.glyphicon-tags.mr-10
+                    span nothing
+                div.post !{post.post}
+            include articles/comment
