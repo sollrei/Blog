@@ -1,0 +1,23 @@
+each comment in post.comments
+    p
+        a(href="comment.website") #{comment.name}
+        span 回复于 #{comment.time}
+    p !{comment.content}
+
+p 留言
+form(method="post" role="form")
+    div.form-group
+        label 姓名
+            if user
+                input(type="text" name="name" value="#{user.name}")
+            else
+                input(type="text" name="name")
+    div.form-group
+        label 邮箱
+            input(type="email" name="email")
+    div.form-group
+        label 网址
+            input(type="text" name="website")
+    textarea.form-control(rows="9" name="content")
+    button.btn.btn-primary(type="submit") 留言
+

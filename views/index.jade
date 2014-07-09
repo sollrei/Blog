@@ -1,12 +1,28 @@
-extends layout
+extends common/layout
 
 block content_main
-    div.container
-        each post,i in posts
-            h3
-                a(href="/u/#{post.name}/#{post.time.day}/#{post.title}") #{post.title}
-                p
-                    small by&nbsp;
-                        a(href="/u/#{post.name}") #{post.name}
-                        |&nbsp;at #{post.time.minute}
-            div !{post.post}
+    div.container.clf
+        div.main.fl.mr-20
+            each post,i in posts
+                article.article
+                    div.date
+                        span.glyphicon.glyphicon-calendar.ico
+                        span.day #{post.time.sDay}
+                        span.month #{post.time.sMonth}
+                        span.year #{post.time.year}
+                    h3.title.pt-10.pb-10
+                        a(href="/u/#{post.name}/#{post.time.day}/#{post.title}") #{post.title}
+                    p.info.ft-lighter
+                        span.glyphicon.glyphicon-user.mr-10
+                        a.mr-10(href="/u/#{post.name}") #{post.name}
+                        span.mr-10 /
+                        span.glyphicon.glyphicon-comment.mr-10
+                        span.mr-10 #{post.comments.length}
+                        span.mr-10 /
+                        span.glyphicon.glyphicon-tags.mr-10
+                        span nothing
+                    div.post !{post.post}
+                    div.bottom
+                        a.more(href="/u/#{post.name}/#{post.time.day}/#{post.title}") READ MORE
+        aside.side.fl
+            include side/cate
