@@ -195,6 +195,9 @@ router.get('/u/:name/:day/:title', function (req, res) {
             return res.redirect('/');
         }
         doc.post = markdown.toHTML(doc.post);
+        doc.comments.forEach(function (comment) {
+            comment.content = markdown.toHTML(comment.content);
+        });
         res.render('article', {
             title: req.param.title,
             post: doc,
