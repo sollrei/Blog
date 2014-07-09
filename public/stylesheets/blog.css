@@ -26,7 +26,7 @@ body{background: none;}
 #footer{height: 400px;background: #626262;margin-top: 20px;}
 
 /* main */
-.main{background: #fff;width: 760px;}
+.main{background: #fff;width: 760px;box-shadow: 1px 1px 1px rgba(33,33,33,.2);}
 .article{position: relative;}
 .main .article{padding: 0 10px 10px 110px;min-height: 200px;}
 .main .date{position: absolute;left: 0;top: 0;color: #aaa;width: 60px;padding: 0 20px;}
@@ -41,7 +41,7 @@ body{background: none;}
 
 /* side */
 .side{width: 360px;}
-.side .section{background: #fff;padding: 10px 20px;}
+.side .section{background: #fff;padding: 10px 20px;box-shadow: 1px 1px 1px rgba(33,33,33,.2);}
 .side h4{border-bottom: 1px solid #333;display: inline-block;line-height: 1.5;}
 .side .cate-list{line-height: 2;color: #999;}
 .side .cate-list li{border-bottom: 1px solid #999;}
