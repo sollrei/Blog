@@ -1,8 +1,9 @@
 each comment in post.comments
     section.comments
         article.comment
-            header.hd    
-                a(href="comment.website") #{comment.name}
+            header.hd
+                span.glyphicon.glyphicon-user.mr-10
+                a.mr-10(href="comment.website") #{comment.name}
                 span 回复于 #{comment.time}
             div.content !{comment.content}
 

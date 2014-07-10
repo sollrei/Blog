@@ -1,6 +1,6 @@
 @charset "utf-8";
 html,
-body{font-family: "microsoft yahei", sans-serif;}
+body{font-family: "microsoft yahei", sans-serif;font-size: 12px;}
 html{background: url(./../images/bg.png) 0 0;}
 body{background: none;}
 
@@ -23,7 +23,7 @@ body{background: none;}
 .mr-20{margin-right: 20px;}
 .mb-10{margin-bottom: 10px;}
 .mb-20{margin-bottom: 20px;}
-
+.glyphicon{color: #dedede;}
 /* footer */
 #footer{height: 300px;background: #626262;margin-top: 20px;}
 
@@ -32,7 +32,7 @@ body{background: none;}
 .article{position: relative;}
 .main .article{padding: 0 10px 10px 110px;min-height: 200px;}
 .main .date{position: absolute;left: 0;top: 0;color: #aaa;width: 60px;padding: 0 20px;}
-.date .ico{font-size: 24px;color: #dedede;}
+.date .ico{font-size: 24px;}
 .date span{display: block;height: 40px;width: 60px;text-align: center;}
 .date .year,
 .date .month,
@@ -52,12 +52,11 @@ body{background: none;}
 
 .article .title a,
 .article .title a:hover{color: #333;}
-.article .info{font-size: 12px;}
 .article .bottom{text-align: right;}
-.article .more{font-size: 12px;}
-
+.article .post{font-size: 14px;}
 /* comments */
 .comments{padding: 10px;}
+.comments .content{font-size: 14px;}
 .message{padding: 10px;}
 
 
