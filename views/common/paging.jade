@@ -1,0 +1,8 @@
+div.page
+    if !isFirstPage
+        span.prev-page
+            a(title="上一页" href="?p=#{page-1}") 上一页
+    if !isLastPage
+        span.next-page
+            a(title="下一页" href="?p=#{page+1}") 下一页
+
