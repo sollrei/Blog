@@ -59,7 +59,8 @@ body{background: none;}
 .comments .content{font-size: 14px;}
 .message{padding: 10px;}
 
-
+/* page */
+.page a{display: inline-block;line-height: 2;padding: 0 10px;background: #fff;margin-right: 10px;}
 
 
 
