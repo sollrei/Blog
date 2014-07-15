@@ -25,9 +25,10 @@ block content_main
                             span.glyphicon.glyphicon-tags.mr-10
                             each tag in post.tags
                                 a.mr-10(href="tags/#{tag}") #{tag}
-                    div.post !{post.post}
+
                     div.bottom
                         a.more(href="/u/#{post.name}/#{post.time.day}/#{post.title}") READ MORE
         aside.side.fl
             include side/cate
     include common/paging
+

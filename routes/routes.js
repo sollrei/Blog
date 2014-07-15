@@ -110,7 +110,8 @@ router.get('/post', function(req, res) {
 router.post('/post', checkLogin);
 router.post('/post', function (req, res) {
     var currentUser = req.session.user,
-        post = new Post(currentUser.name, req.body.title, req.body.post);
+        tags = [req.body.tag1, req.body.tag2, req.body.tag3],
+        post = new Post(currentUser.name, req.body.title, tags, req.body.post);
     post.save(function (err) {
         if (err) {
             req.flash('error', err);
@@ -218,6 +219,7 @@ router.get('/u/:name/:day/:title', function (req, res) {
         });
     });
 });
+
 router.post('/u/:name/:day/:title', function (req, res) {
     var date = new Date(),
         time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + " " + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
@@ -239,13 +241,7 @@ router.post('/u/:name/:day/:title', function (req, res) {
         req.flash('success', '留言成功');
         res.redirect('back');
     });
-
-
-
 });
-
-
-
 
 
 /* edit */
@@ -282,6 +278,7 @@ router.post('/edit/:name/:day/:title', function (req, res) {
     });
 });
 
+/* remove */
 router.get('/remove/:name/:day/:title', checkLogin);
 router.get('/remove/:name/:day/:title', function (req, res) {
     var currentUser = req.session.user;
@@ -295,7 +292,45 @@ router.get('/remove/:name/:day/:title', function (req, res) {
     });
 });
 
+/* tag */
+router.get('/tags', function (req, res) {
+    Post.getTags(function (err, posts) {
+        if (err) {
+            req.flash('error', err);
+            return res.redirect('/');
+        }
+        posts.forEach(function (doc) {
+            doc.post = markdown.toHTML(doc.post);
+        });
+        res.render('tags', {
+            title: '标签',
+            posts: posts,
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+});
 
+router.get('/tags/:tag', function (req, res) {
+    Post.getTag(req.params.tag, function (err, posts) {
+        if (err) {
+            req.flash('error', err);
+            return res.redirect('/');
+        }
+        console.log(posts)
+        posts.forEach(function (doc) {
+            doc.post = markdown.toHTML(doc.post);
+        });
+        res.render('tag', {
+            title: 'TAG:' + req.params.tag,
+            posts: posts,
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+});
 
 
 

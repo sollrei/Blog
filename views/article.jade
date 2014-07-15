@@ -19,7 +19,14 @@ block content_main
                     span.glyphicon.glyphicon-comment.mr-10
                     span.mr-10 #{post.comments.length}
                     span.mr-10 /
-                    span.glyphicon.glyphicon-tags.mr-10
-                    span nothing
+                    if post.tags.length
+                        span.glyphicon.glyphicon-tags.mr-10
+                        each tag in post.tags
+                            a.mr-10(href="tags/#{tag}") #{tag}
+                    if user && (user.name == post.name)
+                        span.mr-10 /
+                        a.edit.mr-10(href="/edit/#{post.name}/#{post.time.day}/#{post.title}") 编辑
+                        span.mr-10 /
+                        a.delete.mr-10(href="/remove/#{post.name}/#{post.time.day}/#{post.title}") 删除
                 div.post !{post.post}
             include articles/comment
