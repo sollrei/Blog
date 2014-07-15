@@ -54,7 +54,13 @@ body{background: none;}
 .side h4{border-bottom: 1px solid #333;display: inline-block;line-height: 1.5;}
 .side .cate-list{line-height: 2;color: #999;}
 .side .cate-list li{border-bottom: 1px solid #999;}
-
+.avatar{padding: 20px 0;}
+.avatar .box{height: 150px;width: 150px;border-radius: 50%;/*border: 5px solid #f2f2f2;*/overflow: hidden;margin: 0 auto;position: relative;}
+.avatar .box .info{position: absolute;display: block;background: rgba(255,255,255,.6);text-align: center;height: 150px;width: 150px;overflow: hidden;border-radius: 50%;opacity: 0;left: 50%;top: 50%;margin-left: -75px;margin-top: -75px;cursor: default;
+    -webkit-transition: all .1s linear;-webkit-transform-origin: 50% 50%;-webkit-transform: scale(2)}
+.avatar .box:hover .info{-webkit-transform: scale(1);opacity: 1;}
+.avatar .title{margin-top: 40%;display: inline-block;font-family: "Times New Roman", Times, serif;border-bottom: 1px solid #333;}
+.avatar img{border-radius: 50%;}
 /* article */
 
 .article .title a,

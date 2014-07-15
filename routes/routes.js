@@ -318,7 +318,6 @@ router.get('/tags/:tag', function (req, res) {
             req.flash('error', err);
             return res.redirect('/');
         }
-        console.log(posts)
         posts.forEach(function (doc) {
             doc.post = markdown.toHTML(doc.post);
         });
