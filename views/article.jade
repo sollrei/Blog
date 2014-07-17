@@ -4,7 +4,7 @@ block content_main
     div.banner.container.mb-20
         img(src="/images/banner.jpg")
     div.container
-        div.main.fl
+        div.main.fl.mr-20
             article.article
                 div.date
                     span.glyphicon.glyphicon-calendar.ico
@@ -19,6 +19,9 @@ block content_main
                     span.glyphicon.glyphicon-comment.mr-10
                     span.mr-10 #{post.comments.length}
                     span.mr-10 /
+                    span.glyphicon.glyphicon-eye-open.mr-10
+                    span.mr-10 #{post.pv}
+                    span.mr-10 /
                     if post.tags.length
                         span.glyphicon.glyphicon-tags.mr-10
                         each tag in post.tags
@@ -30,3 +33,6 @@ block content_main
                         a.delete.mr-10(href="/remove/#{post.name}/#{post.time.day}/#{post.title}") 删除
                 div.post !{post.post}
             include articles/comment
+        aside.side.fl
+            include side/me
+            include side/gallery
