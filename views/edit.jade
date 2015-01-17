@@ -7,5 +7,5 @@ block content_main
                 h3 #{post.title}
             div.form-group
                 label 正文
-                textarea.form-control(rows="9" name="post") !{post.post}
+                textarea#editor.form-control(rows="9" name="post") !{post.post}
             button.btn.btn-primary(type="submit") 保存修改

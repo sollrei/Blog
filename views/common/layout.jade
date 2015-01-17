@@ -5,7 +5,15 @@ html
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/stylesheets/bootstrap.css')
         link(rel='stylesheet', href='/stylesheets/blog.css')
+        link(rel='stylesheet', href='/stylesheets/font-awesome.css')
+        link(rel='stylesheet', href='/stylesheets/simditor.css')
+        <!--[if lt IE 9]>
+        script(src='/javascripts/html5shiv.js')
+        <![endif]-->
     body
         include top
         block content_main
         include footer
+        script(src='/javascripts/jquery-1.11.1.min.js')
+        script(src='/javascripts/simditor-all.min.js')
+        script(src='/javascripts/main.js')

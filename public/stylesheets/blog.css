@@ -28,6 +28,7 @@ body{background: none;}
 .mb-10{margin-bottom: 10px;}
 .mb-20{margin-bottom: 20px;}
 .glyphicon{color: #dedede;}
+.w150{width: 150px !important;}
 /* footer */
 #footer{background: #262626;margin-top: 20px;}
 #footer .top{height: 280px;}
@@ -61,6 +62,8 @@ body{background: none;}
 .avatar .box:hover .info{-webkit-transform: scale(1);opacity: 1;}
 .avatar .title{margin-top: 40%;display: inline-block;font-family: "Times New Roman", Times, serif;border-bottom: 1px solid #333;}
 .avatar img{border-radius: 50%;}
+.search{padding: 0 50px;position: relative;}
+.search .s-ico{position: absolute;right: 55px;top: 10px;font-size: 14px;}
 /* article */
 
 .article .title a,

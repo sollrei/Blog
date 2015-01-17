@@ -29,9 +29,9 @@ router.get('/', function(req, res) {
         if (err) {
             posts = [];
         }
-        posts.forEach(function (doc) {
+        /*posts.forEach(function (doc) {
             doc.post = markdown.toHTML(doc.post);
-        });
+        });*/
         res.render('index', {
             title: '主页',
             user: req.session.user,
@@ -182,9 +182,9 @@ router.get('/u/:name', function (req, res) {
                 req.flash('error', err);
                 return res.redirect('/');
             }
-            posts.forEach(function (doc) {
+            /*posts.forEach(function (doc) {
                 doc.post = markdown.toHTML(doc.post);
-            });
+            });*/
             res.render('user', {
                 title: user.name,
                 posts: posts,
@@ -206,10 +206,10 @@ router.get('/u/:name/:day/:title', function (req, res) {
             req.flash('error', err);
             return res.redirect('/');
         }
-        doc.post = markdown.toHTML(doc.post);
+        /*doc.post = markdown.toHTML(doc.post);
         doc.comments.forEach(function (comment) {
             comment.content = markdown.toHTML(comment.content);
-        });
+        });*/
         res.render('article', {
             title: req.param.title,
             post: doc,
@@ -299,9 +299,9 @@ router.get('/tags', function (req, res) {
             req.flash('error', err);
             return res.redirect('/');
         }
-        posts.forEach(function (doc) {
+        /*posts.forEach(function (doc) {
             doc.post = markdown.toHTML(doc.post);
-        });
+        });*/
         res.render('tags', {
             title: '标签',
             posts: posts,
@@ -318,9 +318,9 @@ router.get('/tags/:tag', function (req, res) {
             req.flash('error', err);
             return res.redirect('/');
         }
-        posts.forEach(function (doc) {
+        /*posts.forEach(function (doc) {
             doc.post = markdown.toHTML(doc.post);
-        });
+        });*/
         res.render('tag', {
             title: 'TAG:' + req.params.tag,
             posts: posts,

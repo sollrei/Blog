@@ -234,13 +234,3 @@ Post.remove = function(name, day, title, callback) {
         });
     });
 };
-
-
-
-
-
-
-
-
-
-
